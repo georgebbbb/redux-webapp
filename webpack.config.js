@@ -1,26 +1,32 @@
 var path = require('path');
-var webpack = require('webpack');
+//为了放在每次修改都便利 react 给他起个花名
+var node_modules = path.resolve(__dirname, 'node_modules');
+var pathToReact = path.resolve(node_modules, 'react/dist/react.min.js');
+var pathToReactRouter = path.resolve(node_modules, 'react-router/umd/ReactRouter.min.js');
 
 module.exports = {
-    entry: './app/index.js',
+ entry: ['webpack/hot/dev-server', path.resolve(__dirname, 'app/main.js')],
     output: {
-        path: __dirname,
-        filename: 'bundle.js'
+        path: path.resolve(__dirname, 'build'),
+        filename: 'bundle.js',
+    },
+    //暂时先不用了
+    resolve: {
+    alias: {
+      'react-router': pathToReactRouter
+    }
     },
     module: {
-        loaders: [
-            {test: path.join(__dirname, 'app'), loader: 'babel-loader'}
-        ]
-    },
-    plugins: [
-        // Avoid publishing files when compilation failed
-        new webpack.NoErrorsPlugin()
-    ],
-    stats: {
-        // Nice colored output
-        colors: true
-    },
-    // Create Sourcemaps for the bundle
-    devtool: 'source-map'
+      loaders: [{
+      test: /\.jsx?$/, // 用正则来匹配文件路径，这段意思是匹配 js 或者 jsx
+      loader: 'babel' // 加载模块 "babel" 是 "babel-loader" 的缩写
+    },{
+      test: /\.css$/,
+      loader: 'style!css'
+    },{
+      test: /\.(png|jpg)$/,
+      loader: 'url?limit=25000'
+    }]
+  }
 
 };
