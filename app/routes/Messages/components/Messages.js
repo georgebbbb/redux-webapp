@@ -1,10 +1,11 @@
 import React from 'react'
 
+
 class Messages extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="messages">
         <h2>Messages</h2>
       </div>
     )

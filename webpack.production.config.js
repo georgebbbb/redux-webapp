@@ -4,7 +4,7 @@ var node_modules_dir = path.resolve(__dirname, 'node_modules');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var node_modules = path.resolve(__dirname, 'node_modules');
 var pathToReactRouter = path.resolve(node_modules, 'react-router/umd/ReactRouter.min.js');
-
+var pathToReduxRouter = path.resolve(node_modules, 'react-router/umd/ReactRouter.min.js');
 var config = {
   entry: {
     app: path.resolve(__dirname, 'app/main.js'),
